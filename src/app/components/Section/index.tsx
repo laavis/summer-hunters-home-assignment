@@ -1,7 +1,7 @@
-import * as React from "react"
+import * as React from 'react';
 
-import styled from "styled-components"
-import { HeadingTwo, Paragraph } from "../../components/Typography"
+import styled from 'styled-components';
+import { HeadingTwo, Paragraph } from '../../components/Typography';
 
 const InnerContainer = styled.div`
   text-align: center;
@@ -16,18 +16,15 @@ const Container = styled.section`
 `;
 
 interface ISectionProps {
-  heading: string
-  paragraph: string
+  heading: string;
+  paragraph: string;
 }
-
 
 export const Section: React.FC<ISectionProps> = ({ heading, paragraph }) => (
   <Container>
     <InnerContainer>
       <HeadingTwo>{heading}</HeadingTwo>
-      <Paragraph>
-        {paragraph}
-      </Paragraph>
+      <Paragraph>{paragraph}</Paragraph>
     </InnerContainer>
   </Container>
 );
