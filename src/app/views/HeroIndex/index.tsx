@@ -41,7 +41,7 @@ interface IHero {
   imgUrl: string;
   description: string;
   backStory: string;
-  strenght: number;
+  strength: number;
   intelligence: number;
   stamina: number;
   healthpoints: number;

@@ -40,6 +40,7 @@ export const HeadingFour = styled.h4`
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
+  color: #fff;
   letter-spacing: 1.15px;
 `;
 
