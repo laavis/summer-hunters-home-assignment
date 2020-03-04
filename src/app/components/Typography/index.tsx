@@ -3,9 +3,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 const headingDefaults = `
-	color: #001147;
-	font-family: "Montserrat";
-	font-weight: 800;
+  color: #001147;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
 `;
 
 export const HeadingOne = styled.h1`
@@ -25,7 +25,7 @@ export const HeadingTwo = styled.h2`
 `;
 
 export const HeadingThree = styled.h3`
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   color: #fff;
   font-size: 22px;
@@ -36,7 +36,7 @@ export const HeadingThree = styled.h3`
 export const HeadingFour = styled.h4`
   ${headingDefaults}
   margin: 0;
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
@@ -49,5 +49,5 @@ export const Paragraph = styled.p`
   font-weight: 500;
   letter-spacing: 0.65px;
   line-height: 32px;
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
 `;

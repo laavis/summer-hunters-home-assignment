@@ -8,6 +8,7 @@ import { Hero } from '../../components/Hero';
 import { Section } from '../../components/Section';
 import { Footer } from '../../components/Footer';
 import { HeroCard } from '../../components/HeroCard';
+import { HeroModal } from '../../components/HeroModal';
 
 const HEROES_QUERY = gql`
   query {
@@ -50,7 +51,7 @@ interface IHero {
   speed: number;
   resistance: string;
   weakness: string;
-
+  skills: object[];
   // extend this to match query above
 }
 
@@ -78,6 +79,8 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
     loading
   } = useQuery<{ heroes: IHero[] }>(HEROES_QUERY);
 
+  const [open, setOpen] = React.useState(null);
+
   if (error) {
     return handleError(error.message);
   }
@@ -86,7 +89,10 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
     return handleLoading();
   }
 
-  console.log(heroes);
+  const handleModalOpen = index => isOpen => {
+    setOpen(isOpen ? index : null);
+    console.log('open modal ', index);
+  };
 
   return (
     <main>
@@ -105,10 +111,11 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 
       {/** Improve this section. Data provided is defined on top in GraphQL query. You can decide what you use and what you dont't.*/}
       <HeroCardContainer>
-        {heroes.map(hero => (
-          <HeroCard key={hero.name} {...hero} />
+        {heroes.map((hero, index) => (
+          <HeroCard key={index} handleModalOpen={handleModalOpen(index)} {...hero} />
         ))}
       </HeroCardContainer>
+      <HeroModal open={open} />
 
       <Footer />
     </main>
