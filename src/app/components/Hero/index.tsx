@@ -35,12 +35,12 @@ const Logo = styled.img`
 `;
 
 const rotate = keyframes`
-	from {
-		-webkit-transform: rotate(0deg);
-	}
-	to {
-			-webkit-transform: rotate(359deg);
-	}
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
 `;
 
 const AnimLogo = styled.img`

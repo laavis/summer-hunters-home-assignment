@@ -2,6 +2,8 @@ import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { HeadingFour, Paragraph } from '../../components/Typography';
 
+import { IHero } from '../../types/Hero';
+
 const Overlay = styled.div<{ open: boolean }>`
   display: flex;
   justify-content: center;
@@ -36,12 +38,20 @@ const Modal = styled.div`
 
 interface IHeroModalProps {
   open: boolean;
+  currentHeroIndex: number;
+  heroes: IHero[];
 }
 
-export const HeroModal: React.FC<IHeroModalProps> = ({ open }) => {
+export const HeroModal: React.FC<IHeroModalProps> = ({ open, heroes, currentHeroIndex }) => {
+  const hero = heroes[currentHeroIndex];
+  console.log(currentHeroIndex);
+
   return (
     <Overlay open={open}>
-      <Modal>Perkele</Modal>
+      <Modal>
+        <p>{hero.name}</p>
+        <p>pek</p>
+      </Modal>
     </Overlay>
   );
 };

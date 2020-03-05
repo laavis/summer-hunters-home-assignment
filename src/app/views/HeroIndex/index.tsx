@@ -10,6 +10,8 @@ import { Footer } from '../../components/Footer';
 import { HeroCard } from '../../components/HeroCard';
 import { HeroModal } from '../../components/HeroModal';
 
+import { IHero } from '../../types/Hero';
+
 const HEROES_QUERY = gql`
   query {
     heroes {
@@ -17,13 +19,8 @@ const HEROES_QUERY = gql`
       imgUrl
       description
       backStory
-      strength
-      intelligence
-      stamina
       healthpoints
       mana
-      agility
-      speed
       resistance
       weakness
       skills {
@@ -34,32 +31,10 @@ const HEROES_QUERY = gql`
       attributes {
         name
         value
-        description
       }
     }
   }
 `;
-
-interface IHeroIndexProps {}
-
-interface IHero {
-  name: string;
-  imgUrl: string;
-  description: string;
-  backStory: string;
-  strength: number;
-  intelligence: number;
-  stamina: number;
-  healthpoints: number;
-  mana: number;
-  agility: number;
-  speed: number;
-  resistance: string;
-  weakness: string;
-  skills: object[];
-  attributes: object[];
-  // extend this to match query above
-}
 
 const HeroCardContainer = styled.div`
   display: flex;
@@ -74,6 +49,8 @@ const HeroCardContainer = styled.div`
   }
 `;
 
+interface IHeroIndexProps {}
+
 const handleLoading = () => <div>Loading...</div>;
 
 const handleError = (message: string) => <div>Error! {message}</div>;
@@ -85,7 +62,8 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
     loading
   } = useQuery<{ heroes: IHero[] }>(HEROES_QUERY);
 
-  const [open, setOpen] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+  const [currentHeroIndex, setCurrentHeroIndex] = React.useState(0);
 
   if (error) {
     return handleError(error.message);
@@ -96,9 +74,12 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
   }
 
   const handleModalOpen = index => isOpen => {
-    setOpen(isOpen ? index : null);
+    setOpen(isOpen);
+    setCurrentHeroIndex(index);
     console.log('open modal ', index);
   };
+
+  console.log(currentHeroIndex, ' lajshdlsahd');
 
   return (
     <main>
@@ -117,11 +98,11 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 
       {/** Improve this section. Data provided is defined on top in GraphQL query. You can decide what you use and what you dont't.*/}
       <HeroCardContainer>
-        {heroes.map((hero, index) => (
-          <HeroCard key={index} handleModalOpen={handleModalOpen(index)} {...hero} />
-        ))}
+        {heroes.map((hero, index) => {
+          return <HeroCard key={index} handleModalOpen={handleModalOpen(index)} {...hero} />;
+        })}
       </HeroCardContainer>
-      <HeroModal open={open !== null} />
+      <HeroModal open={open} heroes={heroes} currentHeroIndex={currentHeroIndex} />
 
       <Footer />
     </main>

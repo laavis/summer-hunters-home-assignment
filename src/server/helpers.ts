@@ -173,10 +173,6 @@ export const seedDatabase = async () => {
   const heroes = heroRepository.create([PORCU, LISA, GIDEON]);
 
   await heroRepository.save(heroes);
-
-  heroes.forEach(hero => {
-    console.log(hero.attributes);
-  });
 };
 
 export type Lazy<T extends object> = Promise<T> | T;

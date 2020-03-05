@@ -3,8 +3,11 @@
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { HeadingFour, Paragraph } from '../../components/Typography';
+import { HeroModal } from '../../components/HeroModal/index';
 
-const Card = styled.div`
+import { IHero } from '../../types/Hero';
+
+const Card = styled.div<{ expanded: boolean }>`
   width: 100%;
   max-width: 320px;
   padding: 1rem;
@@ -17,6 +20,8 @@ const Card = styled.div`
   position: relative;
   overflow: hidden;
   z-index: 10;
+  max-width: 320px;
+
   @media (min-width: 1400px) {
     margin-right: 2rem;
     &:last-of-type {
@@ -101,15 +106,28 @@ const Content = styled.div`
   height: 100%;
 `;
 
-interface IHeroCardProps {
-  name: string;
-  imgUrl: string;
-  description: string;
-  healthpoints: number;
-  strength: number;
-  stamina: number;
+const Overlay = styled.div<{ expanded: boolean }>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  visibility: ${props => (props.expanded ? 'visible' : 'hidden')};
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background: #000;
+    opacity: 0.7;
+    z-index: 100;
+  }
+`;
+
+interface IHeroCardProps extends IHero {
   handleModalOpen: any;
-  // extend this
 }
 
 export const HeroCard: React.FC<IHeroCardProps> = ({
@@ -117,36 +135,37 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
   imgUrl,
   description,
   healthpoints,
-  strength,
-  stamina,
+  mana,
+  resistance,
+  weakness,
+  skills,
+  attributes,
   handleModalOpen
 }) => {
+  const [expanded, setExpanded] = React.useState(null);
+
   return (
-    <Card>
-      <HeadingFour>{name}</HeadingFour>
-      <HeroImg src={imgUrl} alt='' />
-      <Content>
-        <AttributeContainer>
-          <li>
-            <span>Health</span>
-            <span>{healthpoints}</span>
-          </li>
-        </AttributeContainer>
-        <AttributeContainer>
-          <li>
-            <span>Strength</span>
-            <span>{strength}</span>
-          </li>
-        </AttributeContainer>
-        <AttributeContainer>
-          <li>
-            <span>Stamina</span>
-            <span>{stamina}</span>
-          </li>
-        </AttributeContainer>
-        <Description>{description}</Description>
-      </Content>
-      <ViewButton onClick={handleModalOpen}>View</ViewButton>
-    </Card>
+    <div>
+      <Card expanded={expanded}>
+        <HeadingFour>{name}</HeadingFour>
+        <HeroImg src={imgUrl} alt='' />
+        <Content>
+          {attributes.map(attr => (
+            <AttributeContainer>
+              <li>
+                <span>{attr.name}</span>
+                <span>{attr.value}</span>
+              </li>
+            </AttributeContainer>
+          ))}
+          <Description>{description}</Description>
+        </Content>
+        <div>
+          <p>RESISTANCE: {resistance}</p>
+          <p>WEAKNESS: {weakness}</p>
+        </div>
+        <ViewButton onClick={handleModalOpen}>View</ViewButton>
+      </Card>
+    </div>
   );
 };
