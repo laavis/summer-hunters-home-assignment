@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { HeadingFour, Paragraph } from '../../components/Typography';
 
-const Overlay = styled.div`
+const Overlay = styled.div<{ open: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,9 +38,9 @@ interface IHeroModalProps {
   open: boolean;
 }
 
-export const HeroModal: React.FC<IHeroModalProps> = ({ open, ...props }) => {
+export const HeroModal: React.FC<IHeroModalProps> = ({ open }) => {
   return (
-    <Overlay {...props}>
+    <Overlay open={open}>
       <Modal>Perkele</Modal>
     </Overlay>
   );

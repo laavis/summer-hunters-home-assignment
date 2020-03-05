@@ -1,33 +1,32 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm"
-import { ObjectType, ID, Field } from 'type-graphql'
-import { Lazy } from '../helpers'
-import { Hero } from '../entities/hero'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+import { ObjectType, ID, Field } from 'type-graphql';
+import { Lazy } from '../helpers';
+import { Hero } from '../entities/hero';
 import { TElement } from '../types/element';
 
 @Entity()
 @ObjectType()
 export class Skill {
-
   @Field(type => ID)
   @PrimaryGeneratedColumn()
-  id!: number
+  id!: number;
 
-  @ManyToMany(type => Hero, { lazy: true })
-  heroes: Lazy<Hero[]>
-
-  @Field()
-  @Column()
-  name: string
+  @ManyToMany(() => Hero, { lazy: true })
+  heroes: Lazy<Hero[]>;
 
   @Field()
   @Column()
-  description: string
+  name: string;
 
   @Field()
   @Column()
-  damage: number
+  description: string;
 
   @Field()
   @Column()
-  element: TElement
+  damage: number;
+
+  @Field()
+  @Column()
+  element: TElement;
 }

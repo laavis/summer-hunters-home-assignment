@@ -121,8 +121,6 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
   stamina,
   handleModalOpen
 }) => {
-  const [open, setOpen] = React.useState(null);
-
   return (
     <Card>
       <HeadingFour>{name}</HeadingFour>

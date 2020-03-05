@@ -31,6 +31,11 @@ const HEROES_QUERY = gql`
         damage
         element
       }
+      attributes {
+        name
+        value
+        description
+      }
     }
   }
 `;
@@ -52,6 +57,7 @@ interface IHero {
   resistance: string;
   weakness: string;
   skills: object[];
+  attributes: object[];
   // extend this to match query above
 }
 
@@ -115,7 +121,7 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
           <HeroCard key={index} handleModalOpen={handleModalOpen(index)} {...hero} />
         ))}
       </HeroCardContainer>
-      <HeroModal open={open} />
+      <HeroModal open={open !== null} />
 
       <Footer />
     </main>
