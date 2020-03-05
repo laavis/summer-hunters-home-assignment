@@ -12,7 +12,7 @@ export interface IHero {
   // extend this to match query above
 }
 
-interface IAttribute {
+export interface IAttribute {
   name: string;
   value: number;
 }

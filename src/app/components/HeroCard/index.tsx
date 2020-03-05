@@ -4,6 +4,7 @@ import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { HeadingFour, Paragraph } from '../../components/Typography';
 import { HeroModal } from '../../components/HeroModal/index';
+import { HeroAttributes } from '../../components/HeroAttributes/index';
 
 import { IHero } from '../../types/Hero';
 
@@ -42,43 +43,12 @@ const Card = styled.div<{ expanded: boolean }>`
   }
 `;
 
-const AttributeContainer = styled.ul`
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
-  max-width: 40em;
-  padding: 0;
-  overflow-x: hidden;
-  list-style: none;
-
-  span:last-of-type {
-    font-weight: 600;
-  }
-
-  li:before {
-    float: left;
-    width: 0;
-    white-space: nowrap;
-    color: #fc427b;
-    content: '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . '
-      '. . . . . . . . . . . . . . . . . . . . ' '. . . . . . . . . . . . . . . . . . . . ';
-  }
-  span:first-child {
-    padding-right: 0.33em;
-    background: white;
-  }
-  span + span {
-    float: right;
-    padding-left: 0.33em;
-    background: white;
-  }
-`;
-
-const ImgWrapper = styled.div`
-  display: flex;
-`;
-
 const HeroImg = styled.img`
   width: 100%;
+`;
+
+const Content = styled.div`
+  height: 100%;
 `;
 
 const ViewButton = styled.button`
@@ -94,35 +64,6 @@ const ViewButton = styled.button`
 
   &:hover {
     transform: translateY(-2px);
-  }
-`;
-
-const Description = styled(Paragraph)`
-  font-size: 14px;
-  line-height: 24px;
-`;
-
-const Content = styled.div`
-  height: 100%;
-`;
-
-const Overlay = styled.div<{ expanded: boolean }>`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  visibility: ${props => (props.expanded ? 'visible' : 'hidden')};
-
-  &::after {
-    content: '';
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    background: #000;
-    opacity: 0.7;
-    z-index: 100;
   }
 `;
 
@@ -150,20 +91,22 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
         <HeadingFour>{name}</HeadingFour>
         <HeroImg src={imgUrl} alt='' />
         <Content>
-          {attributes.map(attr => (
+          {attributes.map((attr, index) => (
+            <HeroAttributes key={index} attr={attr} isDarkBg={false} />
+          ))}
+          {/*attributes.map(attr => (
             <AttributeContainer>
               <li>
-                <span>{attr.name}</span>
+                <AttributeText>{attr.name}</AttributeText>
                 <span>{attr.value}</span>
               </li>
             </AttributeContainer>
-          ))}
-          <Description>{description}</Description>
+          ))*/}
+          <div>
+            <p>RESISTANCE: {resistance}</p>
+            <p>WEAKNESS: {weakness}</p>
+          </div>
         </Content>
-        <div>
-          <p>RESISTANCE: {resistance}</p>
-          <p>WEAKNESS: {weakness}</p>
-        </div>
         <ViewButton onClick={handleModalOpen}>View</ViewButton>
       </Card>
     </div>
