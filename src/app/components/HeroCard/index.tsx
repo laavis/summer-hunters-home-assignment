@@ -2,15 +2,18 @@
 
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { HeadingFour, Paragraph } from '../../components/Typography';
+import { HeadingFour, Paragraph, BoldParagraph } from '../../components/Typography';
 import { HeroModal } from '../../components/HeroModal/index';
 import { HeroAttributes } from '../../components/HeroAttributes/index';
 
 import { IHero } from '../../types/Hero';
 
+interface IHeroCardProps extends IHero {
+  handleModalOpen: any;
+}
+
 const Card = styled.div<{ expanded: boolean }>`
   width: 100%;
-  max-width: 320px;
   padding: 1rem;
   margin-bottom: 40px;
   display: flex;
@@ -21,10 +24,12 @@ const Card = styled.div<{ expanded: boolean }>`
   position: relative;
   overflow: hidden;
   z-index: 10;
-  max-width: 320px;
 
   @media (min-width: 1400px) {
     margin-right: 2rem;
+    padding: 1.5rem;
+    flex: 0 0 calc(33.333% - 5rem);
+
     &:last-of-type {
       margin-right: 0px;
     }
@@ -45,6 +50,8 @@ const Card = styled.div<{ expanded: boolean }>`
 
 const HeroImg = styled.img`
   width: 100%;
+  max-height: 200px;
+  object-fit: cover;
 `;
 
 const Content = styled.div`
@@ -67,48 +74,90 @@ const ViewButton = styled.button`
   }
 `;
 
-interface IHeroCardProps extends IHero {
-  handleModalOpen: any;
-}
+const ResistanceIcon = styled.span<{ icon: string }>``;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`;
+
+const TraitContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+`;
+
+const TraitText = styled(BoldParagraph)`
+  margin: 0;
+`;
+
+const Health = styled(HeadingFour)`
+  display: flex;
+  align-items: center;
+`;
+
+const HealthIcon = styled.span`
+  width: 32px;
+  height: 32px;
+  display: block;
+  margin-right: 0.5rem;
+  background-image: url('/public/heart.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+`;
+
+const TraitImg = styled.img`
+  width: 32px;
+  align-self: center;
+`;
 
 export const HeroCard: React.FC<IHeroCardProps> = ({
   name,
   imgUrl,
-  description,
   healthpoints,
-  mana,
   resistance,
   weakness,
-  skills,
   attributes,
   handleModalOpen
 }) => {
   const [expanded, setExpanded] = React.useState(null);
 
+  let resistanceIconUrl = '';
+
+  if (resistance === 'Fire') {
+    resistanceIconUrl = '/public/ic_flame.svg';
+  }
+
   return (
-    <div>
-      <Card expanded={expanded}>
-        <HeadingFour>{name}</HeadingFour>
-        <HeroImg src={imgUrl} alt='' />
-        <Content>
-          {attributes.map((attr, index) => (
-            <HeroAttributes key={index} attr={attr} isDarkBg={false} />
-          ))}
-          {/*attributes.map(attr => (
-            <AttributeContainer>
-              <li>
-                <AttributeText>{attr.name}</AttributeText>
-                <span>{attr.value}</span>
-              </li>
-            </AttributeContainer>
-          ))*/}
-          <div>
-            <p>RESISTANCE: {resistance}</p>
-            <p>WEAKNESS: {weakness}</p>
-          </div>
-        </Content>
-        <ViewButton onClick={handleModalOpen}>View</ViewButton>
-      </Card>
-    </div>
+    <Card expanded={expanded}>
+      <FlexWrapper>
+        <HeadingFour>{name} </HeadingFour>
+        <Health>
+          <HealthIcon />
+          {healthpoints}
+        </Health>
+      </FlexWrapper>
+      <HeroImg src={imgUrl} alt='' />
+      <Content>
+        {attributes.map((attr, index) => (
+          <HeroAttributes key={index} attr={attr} isDarkBg={false} />
+        ))}
+        <FlexWrapper>
+          <TraitContainer>
+            <TraitText>Resistance</TraitText>
+            <TraitImg src={resistanceIconUrl} />
+          </TraitContainer>
+          <TraitContainer>
+            <TraitText>Weakness</TraitText>
+            <TraitImg src={resistanceIconUrl} />
+          </TraitContainer>
+        </FlexWrapper>
+      </Content>
+      <ViewButton onClick={handleModalOpen}>Read More</ViewButton>
+    </Card>
   );
 };

@@ -42,7 +42,7 @@ const HeroCardContainer = styled.div`
   padding: 50px;
   align-self: center;
   justify-content: center;
-  max-width: 1150px;
+  max-width: 1200px;
   @media (min-width: 1400px) {
     margin-left: auto;
     margin-right: auto;

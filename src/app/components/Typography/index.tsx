@@ -51,3 +51,7 @@ export const Paragraph = styled.p`
   line-height: 32px;
   font-family: 'Montserrat', sans-serif;
 `;
+
+export const BoldParagraph = styled(Paragraph)`
+  font-weight: 600;
+`;
