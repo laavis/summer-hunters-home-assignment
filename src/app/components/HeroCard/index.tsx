@@ -2,7 +2,11 @@
 
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { HeadingFour, Paragraph, BoldParagraph } from '../../components/Typography';
+import {
+  HeadingFour,
+  Paragraph,
+  BoldParagraph
+} from '../../components/Typography';
 import { HeroAttributes } from '../../components/HeroAttributes/index';
 import Health from '../../components/HeroCard/Health';
 import Element from '../../components/Element';
@@ -21,19 +25,25 @@ const Card = styled.div`
   flex-direction: column;
   border-radius: 4px;
   background: #fff;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12), 0px 12px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12),
+    0px 12px 20px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
   z-index: 10;
+
+  @media (min-width: 700px) {
+    margin-right: 1rem;
+    max-width: 300px;
+  }
 
   @media (min-width: 1400px) {
     margin-right: 2rem;
     padding: 1.5rem;
     flex: 0 0 calc(33.333% - 5rem);
+  }
 
-    &:last-of-type {
-      margin-right: 0px;
-    }
+  &:last-of-type {
+    margin-right: 0px;
   }
 
   &::after {
@@ -70,12 +80,15 @@ const ViewButton = styled.button`
   cursor: pointer;
   transition: transform 0.15s ease;
 
+  @media (max-width: 700px) {
+    width: 100%;
+    padding: 1rem;
+  }
+
   &:hover {
     transform: translateY(-2px);
   }
 `;
-
-const ResistanceIcon = styled.span<{ icon: string }>``;
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -116,7 +129,7 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
         <HeadingFour>{name} </HeadingFour>
         <Health />
       </FlexWrapper>
-      <HeroImg src={imgUrl} alt='' />
+      <HeroImg src={imgUrl} alt="" />
       <Content>
         {attributes.map((attr, index) => (
           <HeroAttributes key={index} attr={attr} isDarkBg={false} />

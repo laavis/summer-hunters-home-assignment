@@ -43,9 +43,13 @@ const HeroCardContainer = styled.div`
   align-self: center;
   justify-content: center;
   max-width: 1200px;
+
   @media (min-width: 1400px) {
     margin-left: auto;
     margin-right: auto;
+  }
+  @media (max-width: 700px) {
+    padding: 50px 1rem;
   }
 `;
 
@@ -102,7 +106,13 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
       {/** Improve this section. Data provided is defined on top in GraphQL query. You can decide what you use and what you dont't.*/}
       <HeroCardContainer>
         {heroes.map((hero, index) => {
-          return <HeroCard key={index} handleModalOpen={handleModalOpen(index)} {...hero} />;
+          return (
+            <HeroCard
+              key={index}
+              handleModalOpen={handleModalOpen(index)}
+              {...hero}
+            />
+          );
         })}
       </HeroCardContainer>
       <HeroModal
