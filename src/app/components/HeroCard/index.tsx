@@ -3,8 +3,9 @@
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { HeadingFour, Paragraph, BoldParagraph } from '../../components/Typography';
-import { HeroModal } from '../../components/HeroModal/index';
 import { HeroAttributes } from '../../components/HeroAttributes/index';
+import Health from '../../components/HeroCard/Health';
+import Element from '../../components/Element';
 
 import { IHero } from '../../types/Hero';
 
@@ -12,7 +13,7 @@ interface IHeroCardProps extends IHero {
   handleModalOpen: any;
 }
 
-const Card = styled.div<{ expanded: boolean }>`
+const Card = styled.div`
   width: 100%;
   padding: 1rem;
   margin-bottom: 40px;
@@ -95,21 +96,6 @@ const TraitText = styled(BoldParagraph)`
   margin: 0;
 `;
 
-const Health = styled(HeadingFour)`
-  display: flex;
-  align-items: center;
-`;
-
-const HealthIcon = styled.span`
-  width: 32px;
-  height: 32px;
-  display: block;
-  margin-right: 0.5rem;
-  background-image: url('/public/heart.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-`;
-
 const TraitImg = styled.img`
   width: 32px;
   align-self: center;
@@ -124,22 +110,11 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
   attributes,
   handleModalOpen
 }) => {
-  const [expanded, setExpanded] = React.useState(null);
-
-  let resistanceIconUrl = '';
-
-  if (resistance === 'Fire') {
-    resistanceIconUrl = '/public/ic_flame.svg';
-  }
-
   return (
-    <Card expanded={expanded}>
+    <Card>
       <FlexWrapper>
         <HeadingFour>{name} </HeadingFour>
-        <Health>
-          <HealthIcon />
-          {healthpoints}
-        </Health>
+        <Health />
       </FlexWrapper>
       <HeroImg src={imgUrl} alt='' />
       <Content>
@@ -149,11 +124,11 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
         <FlexWrapper>
           <TraitContainer>
             <TraitText>Resistance</TraitText>
-            <TraitImg src={resistanceIconUrl} />
+            <Element element={resistance} />
           </TraitContainer>
           <TraitContainer>
             <TraitText>Weakness</TraitText>
-            <TraitImg src={resistanceIconUrl} />
+            <Element element={weakness} />
           </TraitContainer>
         </FlexWrapper>
       </Content>

@@ -76,7 +76,10 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
   const handleModalOpen = index => isOpen => {
     setOpen(isOpen);
     setCurrentHeroIndex(index);
-    console.log('open modal ', index);
+  };
+
+  const handleModalClose = () => {
+    setOpen(false);
   };
 
   console.log(currentHeroIndex, ' lajshdlsahd');
@@ -102,7 +105,12 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
           return <HeroCard key={index} handleModalOpen={handleModalOpen(index)} {...hero} />;
         })}
       </HeroCardContainer>
-      <HeroModal open={open} heroes={heroes} currentHeroIndex={currentHeroIndex} />
+      <HeroModal
+        open={open}
+        heroes={heroes}
+        currentHeroIndex={currentHeroIndex}
+        handleModalClose={handleModalClose}
+      />
 
       <Footer />
     </main>

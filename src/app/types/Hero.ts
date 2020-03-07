@@ -7,7 +7,7 @@ export interface IHero {
   mana: number;
   resistance: string;
   weakness: string;
-  skills: object[];
+  skills: ISkill[];
   attributes: IAttribute[];
   // extend this to match query above
 }
@@ -15,4 +15,10 @@ export interface IHero {
 export interface IAttribute {
   name: string;
   value: number;
+}
+
+export interface ISkill {
+  name: string;
+  damage: number;
+  element: string;
 }
