@@ -1,6 +1,11 @@
 import * as React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { HeadingFour } from '../Typography';
+
+interface IFeatureProps {
+  feature: string;
+  value: number;
+}
 
 const Container = styled.div`
   display: flex;
@@ -36,7 +41,7 @@ const Text = styled(HeadingFour)`
   align-items: center;
 `;
 
-export default ({ feature, value }) => {
+export const Feature: React.FC<IFeatureProps> = ({ feature, value }) => {
   return (
     <Container>
       <Icon className={feature} />

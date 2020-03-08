@@ -48,28 +48,6 @@ const StyledFooter = styled.footer`
   width: 100%;
 `;
 
-const Name = styled.div`
-  font-family: 'Montserrat';
-  font-weight: 600;
-  font-size: 16px;
-  color: #fff;
-  margin-top: 30px;
-  margin-bottom: 5px;
-  letter-spacing: 1.25px;
-`;
-
-const Info = styled.div`
-  font-family: 'Montserrat';
-  font-weight: 400;
-  font-size: 14px;
-  color: #fff;
-  opacity: 0.7;
-  margin-top: 7px;
-  margin-bottom: 7px;
-  line-height: 20px;
-  letter-spacing: 1.25px;
-`;
-
 const Container = styled.div`
   display: flex;
   align-items: flex-start;
@@ -89,7 +67,6 @@ export const Footer: React.FC = () => {
   return (
     <StyledFooter>
       <Container>
-        <ContactInfo></ContactInfo>
         <LogoContainer>
           <Img src={'/public/summer_hunters_logo.svg'} />
         </LogoContainer>

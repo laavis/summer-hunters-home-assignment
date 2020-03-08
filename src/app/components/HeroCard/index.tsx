@@ -1,13 +1,13 @@
 // It is your job to implement this. More info in README
 
 import * as React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import { IHero } from '../../types/Hero';
 import { HeadingFour, Paragraph, BoldParagraph } from '../../components/Typography';
 import { HeroAttributes } from '../../components/HeroAttributes/index';
-import Feature from '../../components/Feature';
-import Trait from '../../components/Trait';
-
-import { IHero } from '../../types/Hero';
+import { Feature } from '../../components/Feature';
+import { Trait } from '../../components/Trait';
+import { Button } from '../../components/Button';
 
 interface IHeroCardProps extends IHero {
   handleModalOpen: any;
@@ -64,27 +64,6 @@ const Content = styled.div`
   height: 100%;
 `;
 
-const ViewButton = styled.button`
-  width: fit-content;
-  padding: 0.5rem 1rem;
-  align-self: flex-end;
-  border: none;
-  font-family: 'Montserrat', sans-serif;
-  color: #fff;
-  background: #fc427b;
-  cursor: pointer;
-  transition: transform 0.15s ease;
-
-  @media (max-width: 769px) {
-    width: 100%;
-    padding: 1rem;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-  }
-`;
-
 const FlexWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -105,19 +84,19 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
     <Card>
       <FlexWrapper>
         <HeadingFour>{name} </HeadingFour>
-        <Feature feature='health' value={healthpoints} />
+        <Feature feature="health" value={healthpoints} />
       </FlexWrapper>
-      <HeroImg src={imgUrl} alt='' />
+      <HeroImg src={imgUrl} alt="" />
       <Content>
         {attributes.map((attr, index) => (
           <HeroAttributes key={index} attr={attr} isDarkBg={false} />
         ))}
         <FlexWrapper>
-          <Trait type='Resistance' element={resistance} iconSize='32px' darkBg={false} />
-          <Trait type='Weakness' element={weakness} iconSize='32px' darkBg={false} />
+          <Trait type="Resistance" element={resistance} iconSize="32px" darkBg={false} />
+          <Trait type="Weakness" element={weakness} iconSize="32px" darkBg={false} />
         </FlexWrapper>
       </Content>
-      <ViewButton onClick={handleModalOpen}>Read More</ViewButton>
+      <Button text="Read More" event={handleModalOpen} />
     </Card>
   );
 };

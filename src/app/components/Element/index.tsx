@@ -1,6 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+interface IElementProps {
+  element: string;
+  size: string;
+}
+
 const Wrapper = styled.span<{ size: string }>`
   width: ${props => props.size};
   height: ${props => props.size};
@@ -11,7 +16,7 @@ const ElementImg = styled.img`
   align-self: center;
 `;
 
-export default ({ element, size }) => {
+export const Element: React.FC<IElementProps> = ({ element, size }) => {
   const setElementIcon = () => {
     switch (element) {
       case 'Fire':

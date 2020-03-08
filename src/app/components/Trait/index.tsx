@@ -1,7 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { BoldParagraph } from '../Typography';
-import Element from '../Element';
+import { Element } from '../Element';
+
+interface ITraitProps {
+  type: string;
+  element: string;
+  iconSize: string;
+  darkBg: boolean;
+}
 
 const TraitContainer = styled.div`
   display: flex;
@@ -17,7 +24,7 @@ const TraitText = styled(BoldParagraph)<{ darkBg: boolean }>`
   color: ${props => (props.darkBg ? '#fff' : '#000')};
 `;
 
-export default ({ type, element, iconSize, darkBg }) => {
+export const Trait: React.FC<ITraitProps> = ({ type, element, iconSize, darkBg }) => {
   return (
     <TraitContainer>
       <TraitText darkBg={darkBg}>{type}</TraitText>

@@ -1,7 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-const Button = styled.button`
+interface IButtonProps {
+  text: string;
+  event: any;
+}
+
+const Btn = styled.button`
   width: fit-content;
   padding: 0.5rem 1rem;
   align-self: flex-end;
@@ -22,6 +27,6 @@ const Button = styled.button`
   }
 `;
 
-export default ({ text, onclick }) => {
-  return <Button onClick={onclick}>{text}</Button>;
+export const Button: React.FC<IButtonProps> = ({ text, event }) => {
+  return <Btn onClick={event}>{text}</Btn>;
 };

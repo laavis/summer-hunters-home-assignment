@@ -86,8 +86,6 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
     setOpen(false);
   };
 
-  console.log(currentHeroIndex, ' lajshdlsahd');
-
   return (
     <main>
       <TopBar />
@@ -103,7 +101,6 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
         `}
       />
 
-      {/** Improve this section. Data provided is defined on top in GraphQL query. You can decide what you use and what you dont't.*/}
       <HeroCardContainer>
         {heroes.map((hero, index) => {
           return <HeroCard key={index} handleModalOpen={handleModalOpen(index)} {...hero} />;

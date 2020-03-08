@@ -3,10 +3,10 @@ import styled, { keyframes } from 'styled-components';
 import { HeadingTwo, Paragraph, BoldParagraph, HeadingFour } from '../../components/Typography';
 import { IHero } from '../../types/Hero';
 import { HeroAttributes } from '../../components/HeroAttributes';
-import Trait from '../../components/Trait';
-import Feature from '../../components/Feature';
-import Element from '../../components/Element';
-import Button from '../../components/Button';
+import { Trait } from '../../components/Trait';
+import { Feature } from '../../components/Feature';
+import { Element } from '../../components/Element';
+import { Button } from '../../components/Button';
 
 interface IHeroModalProps {
   open: boolean;
@@ -252,10 +252,10 @@ export const HeroModal: React.FC<IHeroModalProps> = ({
     <Overlay open={open} className={open ? 'open' : ''}>
       <Wrapper>
         <CloseButton onClick={handleModalClose}>
-          <CloseSvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>
-            <circle cx='12' cy='12' r='10'></circle>
-            <line x1='15' y1='9' x2='9' y2='15'></line>
-            <line x1='9' y1='9' x2='15' y2='15'></line>
+          <CloseSvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="15" y1="9" x2="9" y2="15" />
+            <line x1="9" y1="9" x2="15" y2="15" />
           </CloseSvg>
         </CloseButton>
         <Modal className={open ? 'animate' : ''}>
@@ -264,8 +264,8 @@ export const HeroModal: React.FC<IHeroModalProps> = ({
               <Name>{hero.name}</Name>
             </NameWrapper>
             <Features>
-              <Feature feature='mana' value={hero.mana} />
-              <Feature feature='health' value={hero.healthpoints} />
+              <Feature feature="mana" value={hero.mana} />
+              <Feature feature="health" value={hero.healthpoints} />
             </Features>
             <ImgWrapper>
               <HeroImg src={hero.imgUrl} />
@@ -277,8 +277,8 @@ export const HeroModal: React.FC<IHeroModalProps> = ({
                 ))}
               </Stat>
               <Flex>
-                <Trait type='Resistance' element={hero.resistance} iconSize='32px' darkBg={true} />
-                <Trait type='Weakness' element={hero.weakness} iconSize='32px' darkBg={true} />
+                <Trait type="Resistance" element={hero.resistance} iconSize="32px" darkBg={true} />
+                <Trait type="Weakness" element={hero.weakness} iconSize="32px" darkBg={true} />
               </Flex>
             </Stats>
           </TopSection>
@@ -287,7 +287,7 @@ export const HeroModal: React.FC<IHeroModalProps> = ({
               <Heading>Skills</Heading>
               {hero.skills.map((skill, index) => (
                 <Skill key={index}>
-                  <Element size='48px' element={skill.element} />
+                  <Element size="48px" element={skill.element} />
                   <SkillDamage>{skill.damage}</SkillDamage>
                   <SkillName>{skill.name}</SkillName>
                 </Skill>
@@ -295,7 +295,7 @@ export const HeroModal: React.FC<IHeroModalProps> = ({
             </Flex>
             <Heading>Description</Heading>
             <ModalParagraph>{hero.description}</ModalParagraph>
-            <Button text='Close' onclick={handleModalClose} />
+            <Button text="Close" event={handleModalClose} />
           </BottomSection>
         </Modal>
       </Wrapper>

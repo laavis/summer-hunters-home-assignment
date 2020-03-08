@@ -62,7 +62,7 @@ export const Hero = () => {
       {count >= 5 ? (
         <AnimLogo onClick={increment} src={'/public/summer_hunters_logo.svg'} />
       ) : (
-        <Logo onClick={increment} src='/public/summer_hunters_logo.svg' />
+        <Logo onClick={increment} src="/public/summer_hunters_logo.svg" />
       )}
 
       <Image />
