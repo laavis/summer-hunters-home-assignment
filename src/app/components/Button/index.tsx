@@ -9,13 +9,14 @@ interface IButtonProps {
 const Btn = styled.button`
   width: fit-content;
   padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
   align-self: flex-end;
   border: none;
   font-family: 'Montserrat', sans-serif;
   color: #fff;
   background: #fc427b;
-  cursor: pointer;
   transition: transform 0.15s ease;
+  cursor: pointer;
 
   @media (max-width: 769px) {
     width: 100%;
