@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Base project ",
   "main": "index.js",
+  "engines": {
+    "node": "10.16.0"
+  },
   "scripts": {
     "docz:dev": "docz dev",
     "build": "yarn run clean-dist && webpack -p --config=config/webpack/prod.js",
