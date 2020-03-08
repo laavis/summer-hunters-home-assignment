@@ -1,12 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+const Wrapper = styled.span<{ size: string }>`
+  width: ${props => props.size};
+  height: ${props => props.size};
+`;
+
 const ElementImg = styled.img`
-  width: 32px;
+  width: 100%;
   align-self: center;
 `;
 
-export default ({ element }) => {
+export default ({ element, size }) => {
   const setElementIcon = () => {
     switch (element) {
       case 'Fire':
@@ -21,8 +26,14 @@ export default ({ element }) => {
         return '/public/ic_plasma.svg';
       case 'Psychic':
         return '/public/ic_psychic.svg';
+      case 'Physical':
+        return '/public/ic_physical.svg';
     }
   };
 
-  return <ElementImg src={setElementIcon()} />;
+  return (
+    <Wrapper size={size}>
+      <ElementImg src={setElementIcon()} />
+    </Wrapper>
+  );
 };

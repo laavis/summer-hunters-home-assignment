@@ -1,17 +1,10 @@
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import {
-  HeadingTwo,
-  Paragraph,
-  BoldParagraph,
-  HeadingFour
-} from '../../components/Typography';
-import Health from '../../components/HeroCard/Health';
-
+import { HeadingTwo, Paragraph, BoldParagraph, HeadingFour } from '../../components/Typography';
 import { IHero } from '../../types/Hero';
 import { HeroAttributes } from '../../components/HeroAttributes';
-import { Hero } from 'src/server/entities/hero';
-
+import Trait from '../../components/Trait';
+import Feature from '../../components/Feature';
 import Element from '../../components/Element';
 
 interface IHeroModalProps {
@@ -51,6 +44,11 @@ const Overlay = styled.div<{ open: boolean }>`
   }
 `;
 
+const Wrapper = styled.div`
+  position: relative;
+  z-index: 101;
+`;
+
 const Modal = styled.div`
   width: 100%;
   max-width: 900px;
@@ -59,7 +57,6 @@ const Modal = styled.div`
   overflow: hidden;
   background: #fff;
   z-index: 101;
-  overflow: scroll;
   font-family: 'Montserrat', sans-serif;
   transform: translateY(20px);
   transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
@@ -76,9 +73,13 @@ const TopSection = styled.div`
   display: grid;
   grid-column-gap: 1rem;
   grid-template-rows: min-content;
-  grid-auto-columns: 240px 1fr;
-  grid-template-areas: 'name health' 'image attributes';
+  grid-template-columns: 240px 1fr;
+  grid-template-areas: 'name features' 'image attributes';
   background: #001147;
+
+  @media (min-width: 1000px) {
+    grid-template-columns: 340px 1fr;
+  }
 `;
 
 const HeroImg = styled.img`
@@ -116,6 +117,8 @@ const BottomSection = styled.div`
 
 const Heading = styled(HeadingFour)`
   color: #000;
+  flex: 100%;
+  font-weight: 800;
 `;
 
 const ModalParagraph = styled(Paragraph)`
@@ -124,16 +127,13 @@ const ModalParagraph = styled(Paragraph)`
 `;
 
 const CloseButton = styled.div`
-  padding: 1rem;
+  padding: 0;
   width: 36px;
   height: 36px;
   position: absolute;
-  right: 25px;
-  top: 25px;
-  /* background-image: url('/public/ic_close.svg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat; */
+  right: 0;
+  top: 0;
+  transform: translate(2.5rem, -2.5rem);
   cursor: pointer;
 `;
 
@@ -162,19 +162,9 @@ const CloseSvg = styled.svg`
   }
 `;
 
-const Skills = styled.div`
+const Flex = styled.div`
   display: flex;
-  margin: 1rem 0;
-`;
-
-const SkillCircle = styled.div`
-  width: 42px;
-  height: 42px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
-  border: 2px solid #dadada;
+  flex-wrap: wrap;
 `;
 
 const Skill = styled.div`
@@ -182,7 +172,7 @@ const Skill = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-right: 2rem;
+  margin: 1rem 3rem 2rem 0;
 
   &:last-of-type {
     margin-right: 0;
@@ -200,6 +190,11 @@ const SkillName = styled.span`
   font-weight: 600;
 `;
 
+const Features = styled(Flex)`
+  justify-content: flex-end;
+  align-items: flex-start;
+`;
+
 export const HeroModal: React.FC<IHeroModalProps> = ({
   open,
   heroes,
@@ -210,52 +205,54 @@ export const HeroModal: React.FC<IHeroModalProps> = ({
 
   return (
     <Overlay open={open} className={open ? 'open' : ''}>
-      <Modal className={open ? 'animate' : ''}>
+      <Wrapper>
         <CloseButton onClick={handleModalClose}>
-          <CloseSvg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="15" y1="9" x2="9" y2="15"></line>
-            <line x1="9" y1="9" x2="15" y2="15"></line>
+          <CloseSvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>
+            <circle cx='12' cy='12' r='10'></circle>
+            <line x1='15' y1='9' x2='9' y2='15'></line>
+            <line x1='9' y1='9' x2='15' y2='15'></line>
           </CloseSvg>
         </CloseButton>
-        <TopSection>
-          <NameWrapper>
-            <Name>{hero.name}</Name>
-          </NameWrapper>
-          <Health />
-          <ImgWrapper>
-            <HeroImg src={hero.imgUrl} />
-          </ImgWrapper>
-          <Stats>
-            <Stat>
-              {hero.attributes.map((attr, index) => (
-                <HeroAttributes key={index} attr={attr} isDarkBg={true} />
+        <Modal className={open ? 'animate' : ''}>
+          <TopSection>
+            <NameWrapper>
+              <Name>{hero.name}</Name>
+            </NameWrapper>
+            <Features>
+              <Feature feature='mana' value={hero.mana} />
+              <Feature feature='health' value={hero.healthpoints} />
+            </Features>
+            <ImgWrapper>
+              <HeroImg src={hero.imgUrl} />
+            </ImgWrapper>
+            <Stats>
+              <Stat>
+                {hero.attributes.map((attr, index) => (
+                  <HeroAttributes key={index} attr={attr} isDarkBg={true} />
+                ))}
+              </Stat>
+              <Flex>
+                <Trait type='Resistance' element={hero.resistance} iconSize='32px' darkBg={true} />
+                <Trait type='Weakness' element={hero.weakness} iconSize='32px' darkBg={true} />
+              </Flex>
+            </Stats>
+          </TopSection>
+          <BottomSection>
+            <Flex>
+              <Heading>Skills</Heading>
+              {hero.skills.map((skill, index) => (
+                <Skill key={index}>
+                  <Element size='48px' element={skill.element} />
+                  <SkillDamage>{skill.damage}</SkillDamage>
+                  <SkillName>{skill.name}</SkillName>
+                </Skill>
               ))}
-            </Stat>
-          </Stats>
-        </TopSection>
-        <BottomSection>
-          <Heading>Skills</Heading>
-          <Skills>
-            {hero.skills.map((skill, index) => (
-              <Skill key={index}>
-                <SkillCircle>
-                  <Element element={skill.element} />
-                </SkillCircle>
-                <SkillDamage>{skill.damage}</SkillDamage>
-                <SkillName>{skill.name}</SkillName>
-              </Skill>
-            ))}
-          </Skills>
-          <Heading>Description</Heading>
-          <ModalParagraph>{hero.description}</ModalParagraph>
-        </BottomSection>
-      </Modal>
+            </Flex>
+            <Heading>Description</Heading>
+            <ModalParagraph>{hero.description}</ModalParagraph>
+          </BottomSection>
+        </Modal>
+      </Wrapper>
     </Overlay>
   );
 };

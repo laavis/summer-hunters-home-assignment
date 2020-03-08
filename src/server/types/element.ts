@@ -1,8 +1,1 @@
-export type TElement
-  = 'Fire'
-  | 'Earth'
-  | 'Air'
-  | 'Water'
-  | 'Plasma'
-  | 'Physical'
-  | 'Psychic'
+export type TElement = 'Fire' | 'Earth' | 'Air' | 'Water' | 'Plasma' | 'Physical' | 'Psychic';

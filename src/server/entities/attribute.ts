@@ -13,12 +13,6 @@ export class Attribute {
   @ManyToMany(() => Hero, { lazy: true })
   heroes: Lazy<Hero[]>;
 
-  // @ManyToOne(
-  //   () => Hero,
-  //   hero => hero.attributes
-  // )
-  // hero: Hero;
-
   @Field()
   @Column()
   name: string;

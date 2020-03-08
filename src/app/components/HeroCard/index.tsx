@@ -2,14 +2,10 @@
 
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import {
-  HeadingFour,
-  Paragraph,
-  BoldParagraph
-} from '../../components/Typography';
+import { HeadingFour, Paragraph, BoldParagraph } from '../../components/Typography';
 import { HeroAttributes } from '../../components/HeroAttributes/index';
-import Health from '../../components/HeroCard/Health';
-import Element from '../../components/Element';
+import Feature from '../../components/Feature';
+import Trait from '../../components/Trait';
 
 import { IHero } from '../../types/Hero';
 
@@ -25,8 +21,7 @@ const Card = styled.div`
   flex-direction: column;
   border-radius: 4px;
   background: #fff;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12),
-    0px 12px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12), 0px 12px 20px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
   z-index: 10;
@@ -102,6 +97,7 @@ const TraitContainer = styled.div`
   flex-direction: column;
   flex: 1;
   justify-content: center;
+  align-items: center;
   text-align: center;
 `;
 
@@ -127,22 +123,16 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
     <Card>
       <FlexWrapper>
         <HeadingFour>{name} </HeadingFour>
-        <Health />
+        <Feature feature='health' value={healthpoints} />
       </FlexWrapper>
-      <HeroImg src={imgUrl} alt="" />
+      <HeroImg src={imgUrl} alt='' />
       <Content>
         {attributes.map((attr, index) => (
           <HeroAttributes key={index} attr={attr} isDarkBg={false} />
         ))}
         <FlexWrapper>
-          <TraitContainer>
-            <TraitText>Resistance</TraitText>
-            <Element element={resistance} />
-          </TraitContainer>
-          <TraitContainer>
-            <TraitText>Weakness</TraitText>
-            <Element element={weakness} />
-          </TraitContainer>
+          <Trait type='Resistance' element={resistance} iconSize='32px' darkBg={false} />
+          <Trait type='Weakness' element={weakness} iconSize='32px' darkBg={false} />
         </FlexWrapper>
       </Content>
       <ViewButton onClick={handleModalOpen}>Read More</ViewButton>
