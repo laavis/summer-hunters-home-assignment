@@ -6,7 +6,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  grid-area: features;
 
   margin-right: 2rem;
   &:last-of-type {

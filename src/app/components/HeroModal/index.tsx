@@ -6,6 +6,7 @@ import { HeroAttributes } from '../../components/HeroAttributes';
 import Trait from '../../components/Trait';
 import Feature from '../../components/Feature';
 import Element from '../../components/Element';
+import Button from '../../components/Button';
 
 interface IHeroModalProps {
   open: boolean;
@@ -27,6 +28,10 @@ const Overlay = styled.div<{ open: boolean }>`
   visibility: ${props => (props.open ? 'visible' : 'hidden')};
 
   &.open {
+    @media (max-width: 769px) {
+      display: block;
+      overflow: scroll;
+    }
     &::after {
       opacity: 0.7;
     }
@@ -51,9 +56,7 @@ const Wrapper = styled.div`
 
 const Modal = styled.div`
   width: 100%;
-  max-width: 900px;
-  height: 85vh;
-  border-radius: 4px;
+  max-width: 800px;
   overflow: hidden;
   background: #fff;
   z-index: 101;
@@ -66,6 +69,15 @@ const Modal = styled.div`
     transform: translateY(0);
     opacity: 1;
   }
+
+  @media (min-width: 769px) {
+    height: 85vh;
+    border-radius: 4px;
+  }
+
+  @media (min-width: 1000px) {
+    max-width: 900px;
+  }
 `;
 
 const TopSection = styled.div`
@@ -73,9 +85,17 @@ const TopSection = styled.div`
   display: grid;
   grid-column-gap: 1rem;
   grid-template-rows: min-content;
-  grid-template-columns: 240px 1fr;
-  grid-template-areas: 'name features' 'image attributes';
   background: #001147;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'name name'
+    'features features'
+    'image image'
+    'attributes attributes';
+
+  @media (min-width: 769px) {
+    grid-template-areas: 'name features' 'image attributes';
+  }
 
   @media (min-width: 1000px) {
     grid-template-columns: 340px 1fr;
@@ -100,7 +120,12 @@ const Stat = styled.div`
 
 const NameWrapper = styled.div`
   grid-area: name;
+
+  @media (max-width: 769px) {
+    text-align: center;
+  }
 `;
+
 const Name = styled(HeadingTwo)`
   color: #fff;
   margin: 0 0 1.5rem 0;
@@ -113,6 +138,12 @@ const ImgWrapper = styled.div`
 
 const BottomSection = styled.div`
   padding: 1.5rem;
+
+  button {
+    @media (min-width: 769px) {
+      display: none;
+    }
+  }
 `;
 
 const Heading = styled(HeadingFour)`
@@ -165,6 +196,10 @@ const CloseSvg = styled.svg`
 const Flex = styled.div`
   display: flex;
   flex-wrap: wrap;
+
+  @media (max-width: 769px) {
+    justify-content: space-evenly;
+  }
 `;
 
 const Skill = styled.div`
@@ -172,10 +207,15 @@ const Skill = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 1rem 3rem 2rem 0;
+  margin: 1rem 0rem 1.5rem 0;
 
   &:last-of-type {
     margin-right: 0;
+  }
+
+  @media (min-width: 769px) {
+    margin: 1rem 3rem 2rem 0;
+    grid-template-areas: 'name features' 'image attributes';
   }
 `;
 
@@ -193,6 +233,11 @@ const SkillName = styled.span`
 const Features = styled(Flex)`
   justify-content: flex-end;
   align-items: flex-start;
+  grid-area: features;
+
+  @media (max-width: 769px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const HeroModal: React.FC<IHeroModalProps> = ({
@@ -250,6 +295,7 @@ export const HeroModal: React.FC<IHeroModalProps> = ({
             </Flex>
             <Heading>Description</Heading>
             <ModalParagraph>{hero.description}</ModalParagraph>
+            <Button text='Close' onclick={handleModalClose} />
           </BottomSection>
         </Modal>
       </Wrapper>

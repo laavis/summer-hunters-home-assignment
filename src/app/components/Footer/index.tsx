@@ -10,7 +10,7 @@ const Img = styled.img`
 
 const ContactInfo = styled.div`
   flex: 1 0 33%;
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     margin-top: 30px;
     text-align: center;
   }
@@ -25,7 +25,7 @@ const LeftSection = styled.div`
   font-family: 'Montserrat';
   font-weight: 500;
   margin-top: 80px;
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     margin-top: 50px;
   }
 `;
@@ -78,7 +78,7 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 50px;
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     flex-direction: column-reverse;
     align-items: center;
     justify-content: space-around;

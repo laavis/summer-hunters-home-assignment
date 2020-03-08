@@ -26,7 +26,7 @@ const Card = styled.div`
   overflow: hidden;
   z-index: 10;
 
-  @media (min-width: 700px) {
+  @media (min-width: 769px) {
     margin-right: 1rem;
     max-width: 300px;
   }
@@ -75,7 +75,7 @@ const ViewButton = styled.button`
   cursor: pointer;
   transition: transform 0.15s ease;
 
-  @media (max-width: 700px) {
+  @media (max-width: 769px) {
     width: 100%;
     padding: 1rem;
   }
@@ -90,24 +90,6 @@ const FlexWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
-`;
-
-const TraitContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-`;
-
-const TraitText = styled(BoldParagraph)`
-  margin: 0;
-`;
-
-const TraitImg = styled.img`
-  width: 32px;
-  align-self: center;
 `;
 
 export const HeroCard: React.FC<IHeroCardProps> = ({

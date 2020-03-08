@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const Container = styled.header<Partial<ITopBar>>`
   background: #001147;
   height: 60px;
+  padding-left: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,7 +14,7 @@ const Container = styled.header<Partial<ITopBar>>`
     margin-right: 30px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     height: 80px;
   }
 `;
@@ -21,8 +22,7 @@ const Container = styled.header<Partial<ITopBar>>`
 const Logo = styled.img`
   width: 100%;
   height: 65%;
-  margin-left: 30px;
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     height: 50%;
   }
 `;

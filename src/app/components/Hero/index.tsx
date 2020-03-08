@@ -18,7 +18,7 @@ const Image = styled.div`
   max-width: 1100px;
   margin: 0 auto;
   z-index: 0;
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     max-height: 500px;
     min-height: 500px;
   }
